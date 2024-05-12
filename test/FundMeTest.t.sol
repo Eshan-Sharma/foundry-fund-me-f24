@@ -9,6 +9,7 @@ contract FundMeTest is Test {
     FundMe fundMe;
 
     function setUp() external {
+        //us -> FumdMeTest -> FundMe
         fundMe = new FundMe();
     }
 
