@@ -19,7 +19,7 @@ contract FundMe {
     using PriceConverter for uint256;
     // Using constant - it is constant at compile time and no longer takes up storage spot
 
-    uint256 public constant MINIMUM_USD = 50 * 1e18; //Instead of minimum ETH, let's set minimum Usd value
+    uint256 public constant MINIMUM_USD = 5 * 1e18; //Instead of minimum ETH, let's set minimum Usd value
     address[] public funders;
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
 
