@@ -1,7 +1,7 @@
 //SPDX-License-Identifier:MIT
 pragma solidity ^0.8.18;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {FundMe} from "../src/FundMe.sol";
 import {DeployFundMe} from "../script/DeployFundMe.s.sol";
 
@@ -12,6 +12,7 @@ contract FundMeTest is Test {
     address USER = makeAddr("user");
     uint256 constant SEND_VALUE = 0.1 ether;
     uint256 constant STARTING_VALUE = 10 ether;
+    uint256 constant GAS_PRICE = 1;
 
     function setUp() external {
         //us -> FumdMeTest -> FundMe
@@ -68,9 +69,14 @@ contract FundMeTest is Test {
         //Arrage
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalanace = address(fundMe).balance;
-        //Act
+        // //Act
+        // uint256 gasStart = gasleft();
+        // vm.txGasPrice(GAS_PRICE);
         vm.prank(fundMe.i_owner());
         fundMe.withdraw();
+        // uint256 gasEnd = gasleft();
+        // uint256 gasUsed = (gasEnd - gasStart) * tx.gasprice;
+        // console.log(gasUsed);
         //Assert
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalanace = address(fundMe).balance;
